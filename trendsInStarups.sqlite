@@ -1,0 +1,75 @@
+-- count companies in table
+
+select count(name)
+from startups;
+
+-- total value of all companies
+
+select sum(valuation)
+from startups;
+
+-- largest amount raised
+
+select max(raised)
+from startups;
+
+-- largest amount raised durring seed stage
+
+select max(raised)
+from startups
+where stage = "Seed";
+
+-- oldest company on the list
+
+select min(founded)
+from startups;
+
+-- average valuation
+
+select avg(valuation)
+from startups;
+
+-- average valuation of each category
+
+select category, avg(valuation)
+from startups
+group by category
+limit 10;
+
+-- average valuation of each category, rounded, sorted
+
+select category, round(avg(valuation),2)
+from startups
+group by category
+order by 2 desc
+limit 10;
+
+-- number of companies in each category
+
+select category, count(name)
+from startups 
+group by category
+order by 1 asc
+limit 10;
+
+-- number of companies in each category, with categories having more than 3 companies
+
+select category, count(name)
+from startups
+group by category
+having count(name) > 3;
+
+-- avg size of startups by location
+
+select location, avg(employees)
+from startups
+group by location
+order by 2 desc;
+
+-- avg size of startups with sizes above 500
+
+select location, avg(employees)
+from startups
+group by location
+having avg(employees) > 500
+order by 2 desc;
